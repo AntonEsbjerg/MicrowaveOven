@@ -34,7 +34,7 @@ namespace Microwave.App
             // Simulate a simple sequence
 
             powerButton.Press();
-            // Test Jenkins Webhook
+            // Test2 Jenkins Webhook 
             timeButton.Press();
 
             startCancelButton.Press();
