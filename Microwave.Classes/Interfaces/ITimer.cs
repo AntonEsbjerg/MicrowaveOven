@@ -15,5 +15,7 @@ namespace Microwave.Classes.Interfaces
 
         void Start(int time);
         void Stop();
+        void TimerShortened();
+        void TimerExtended();
     }
 }

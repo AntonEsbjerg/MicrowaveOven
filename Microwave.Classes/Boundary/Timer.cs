@@ -51,6 +51,20 @@ namespace Microwave.Classes.Boundary
                 Expire();
             }
         }
-
+        public void TimerExtended()
+        {
+            // Timer will be extended with 30 seconds
+            TimeRemaining += 30;
+        }
+        public void TimerShortened()
+        {
+            // Timer will be shortened by 30 seconds 
+            // If Timer is now 0 or below the timer will expire
+            TimeRemaining -= 30;
+            if (TimeRemaining <= 0)
+            {
+                Expire();
+            }
+        }
     }
 }

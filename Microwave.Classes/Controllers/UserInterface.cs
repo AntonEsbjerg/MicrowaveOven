@@ -8,11 +8,10 @@ namespace Microwave.Classes.Controllers
     {
         private enum States
         {
-            READY, SETPOWER, SETTIME, COOKING, DOOROPEN
+            READY, SETPOWER, SETTIME, COOKING, DOOROPEN, EXTEND, SUBTRACT
         }
 
         private States myState = States.READY;
-
         private ICookController myCooker;
         private ILight myLight;
         private IDisplay myDisplay;
@@ -24,6 +23,8 @@ namespace Microwave.Classes.Controllers
             IButton powerButton,
             IButton timeButton,
             IButton startCancelButton,
+            IButton extendButton,
+            IButton shortenButton,
             IDoor door,
             IDisplay display,
             ILight light,
@@ -151,6 +152,25 @@ namespace Microwave.Classes.Controllers
                     myLight.TurnOff();
                     // Beep 3 times
                     myState = States.READY;
+                    break;
+            }
+        }
+
+        public void ExtendCooking(object sender, EventArgs e)
+        {
+            switch (myState)
+            {
+                case States.EXTEND:
+                    myCooker.ExtendCooking();
+                    break;
+            }
+        }
+        public void ShortenCooking(object sender, EventArgs e)
+        {
+            switch (myState)
+            {
+                case States.SUBTRACT:
+                    myCooker.ShortenCooking();
                     break;
             }
         }
