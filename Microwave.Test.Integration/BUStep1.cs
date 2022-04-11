@@ -12,10 +12,12 @@ namespace Microwave.Test.Integration
     public class BUStep1
     {
         private IOutput output;
-        private Timer timer;
-        private Display display;
-        private PowerTube powerTube;
-        private CookController cooker;
+        private ITimer timer;
+        private IDisplay display;
+        private IPowerTube powerTube;
+        private ICookController cooker;
+        private IButton extentButton;
+        private IButton shortenButton;
 
         private IUserInterface ui;
 

@@ -10,12 +10,14 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class TDStep1
     {
-        private Door door;
-        private Button powerButton;
-        private Button timeButton;
-        private Button startCancelButton;
+        private IDoor door;
+        private IButton powerButton;
+        private IButton timeButton;
+        private IButton startCancelButton;
+        private IButton extentButton;
+        private IButton shortenButton;
 
-        private UserInterface ui;
+        private IUserInterface ui;
 
         private ILight light;
         private IDisplay display;
@@ -33,7 +35,7 @@ namespace Microwave.Test.Integration
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton,extentButton, shortenButton, door, display, light, cooker);
         }
 
         [Test]
