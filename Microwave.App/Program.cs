@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Threading;
 using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
+using Timer = Microwave.Classes.Boundary.Timer;
 
 namespace Microwave.App
 {
@@ -41,12 +43,19 @@ namespace Microwave.App
             timeButton.Press();
 
             startCancelButton.Press();
-
+            Thread.Sleep(5000);
+            extendButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
             // The simple sequence should now run
 
             System.Console.WriteLine("When you press enter, the program will stop");
             // Wait for input
-
+            
             System.Console.ReadLine();
         }
     }

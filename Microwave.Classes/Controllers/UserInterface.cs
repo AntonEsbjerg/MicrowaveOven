@@ -8,7 +8,7 @@ namespace Microwave.Classes.Controllers
     {
         private enum States
         {
-            READY, SETPOWER, SETTIME, COOKING, DOOROPEN, EXTEND, SUBTRACT
+            READY, SETPOWER, SETTIME, COOKING, DOOROPEN
         }
 
         private States myState = States.READY;
@@ -33,6 +33,8 @@ namespace Microwave.Classes.Controllers
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
             startCancelButton.Pressed += new EventHandler(OnStartCancelPressed);
+            extendButton.Pressed += new EventHandler(ExtendCooking);
+            shortenButton.Pressed += new EventHandler(ShortenCooking);
 
             door.Closed += new EventHandler(OnDoorClosed);
             door.Opened += new EventHandler(OnDoorOpened);
@@ -159,21 +161,11 @@ namespace Microwave.Classes.Controllers
 
         public void ExtendCooking(object sender, EventArgs e)
         {
-            switch (myState)
-            {
-                case States.EXTEND:
-                    myCooker.ExtendCooking();
-                    break;
-            }
+            myCooker.ExtendCooking();
         }
         public void ShortenCooking(object sender, EventArgs e)
         {
-            switch (myState)
-            {
-                case States.SUBTRACT:
-                    myCooker.ShortenCooking();
-                    break;
-            }
+            myCooker.ShortenCooking();
         }
     }
 }
