@@ -16,6 +16,7 @@ namespace Microwave.App
             IButton timeButton = new Button();
             IButton extendButton = new Button();
             IButton shortenButton = new Button();
+            IButton configurePowerTubeButton = new Button();
 
             IDoor door = new Door();
 
