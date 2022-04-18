@@ -5,6 +5,16 @@ namespace Microwave.Classes.Boundary
 {
     public class PowerTube : IPowerTube
     {
+        private enum PowerLevel
+        {
+            Standard,
+            high,
+            VeryHigh,
+            VeryLow,
+            Low,
+        }
+
+        private PowerLevel powerLevel;
         private IOutput myOutput;
 
         private bool IsOn = false;
@@ -43,6 +53,35 @@ namespace Microwave.Classes.Boundary
                 myOutput.OutputLine($"PowerTube already turned off");
             }
             IsOn = false;
+        }
+
+        public void AdjustPower()
+        {
+            if (powerLevel == PowerLevel.Standard)
+            {
+                powerLevel = PowerLevel.high;
+
+            }
+            else  if (powerLevel == PowerLevel.high)
+            {
+                powerLevel = PowerLevel.VeryHigh;
+
+            }
+            else if (powerLevel == PowerLevel.VeryHigh)
+            {
+                powerLevel = PowerLevel.Low;
+
+            }
+            else if (powerLevel == PowerLevel.Low)
+            {
+                powerLevel = PowerLevel.VeryLow;
+
+            }
+            else if (powerLevel == PowerLevel.VeryLow)
+            {
+                powerLevel = PowerLevel.Standard;
+
+            }
         }
     }
 }
