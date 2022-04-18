@@ -55,32 +55,36 @@ namespace Microwave.Classes.Boundary
             IsOn = false;
         }
 
-        public void AdjustPower()
+        public int AdjustPower()
         {
             if (powerLevel == PowerLevel.Standard)
             {
                 powerLevel = PowerLevel.high;
-
+                return 800;
             }
             else  if (powerLevel == PowerLevel.high)
             {
                 powerLevel = PowerLevel.VeryHigh;
-
+                return 1000;
             }
             else if (powerLevel == PowerLevel.VeryHigh)
             {
-                powerLevel = PowerLevel.Low;
-
-            }
-            else if (powerLevel == PowerLevel.Low)
-            {
                 powerLevel = PowerLevel.VeryLow;
-
+                return 200;
             }
             else if (powerLevel == PowerLevel.VeryLow)
             {
+                powerLevel = PowerLevel.Low;
+                return 600;
+            }
+            else if (powerLevel == PowerLevel.Low)
+            {
                 powerLevel = PowerLevel.Standard;
-
+                return 700;
+            }
+            else
+            {
+                return 50;
             }
         }
     }

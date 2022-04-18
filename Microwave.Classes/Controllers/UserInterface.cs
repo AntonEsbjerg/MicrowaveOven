@@ -57,7 +57,9 @@ namespace Microwave.Classes.Controllers
 
         public void ChangePowerTubePowerLevel(object sender, EventArgs e)
         {
+            powerLevel = 
             myPowerTube.AdjustPower();
+            
         }
 
         public void OnPowerPressed(object sender, EventArgs e)
