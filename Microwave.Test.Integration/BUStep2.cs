@@ -19,8 +19,9 @@ namespace Microwave.Test.Integration
         private IPowerTube powerTube;
         private ICookController cooker;
 
-        private IUserInterface ui;
-        private ILight light;
+        private UserInterface ui;
+        private Light light;
+        private Buzzer buzzer;
 
         private IButton powerButton;
         private IButton timeButton;
@@ -46,6 +47,8 @@ namespace Microwave.Test.Integration
             powerTube = new PowerTube(output);
 
             light = new Light(output);
+            buzzer = new Buzzer(output);
+            
 
             cooker = new CookController(timer, display, powerTube);
 
@@ -53,7 +56,7 @@ namespace Microwave.Test.Integration
             ui = new UserInterface(
                 powerButton, timeButton, startCancelButton, extentButton, shortenButton,
                 door, 
-                display, light, cooker);
+                display, light, cooker, buzzer);
 
             cooker.UI = ui;
 
