@@ -27,11 +27,13 @@ namespace Microwave.App
 
             ILight light = new Light(output);
 
+            Buzzer buzzer = new Buzzer(output);
+
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            IUserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton,door, display, light, cooker);
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton, door, display, light, cooker, buzzer);
 
             // Finish the double association
             cooker.UI = ui;
