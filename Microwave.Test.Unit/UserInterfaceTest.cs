@@ -22,6 +22,9 @@ namespace Microwave.Test.Unit
 
         private ICookController cooker;
 
+        private IButton extendButton;
+        private IButton shortenButton;
+
         [SetUp]
         public void Setup()
         {
@@ -32,9 +35,11 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
+            extendButton = Substitute.For<IButton>();
+            shortenButton= Substitute.For<IButton>();
 
             uut = new UserInterface(
-                powerButton, timeButton, startCancelButton,
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton,
                 door,
                 display,
                 light,
@@ -335,6 +340,19 @@ namespace Microwave.Test.Unit
             light.Received(1).TurnOff();
         }
 
+        [Test]
+        public void Cooking_ExtendButton_CookerShortenCalled()
+        {
+            extendButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            cooker.Received(1).ExtendCooking();
+        }
+        [Test]
+        public void Cooking_ShortenButton_CookerShortenCalled()
+        {
+            shortenButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+
+            cooker.Received(1).ShortenCooking();
+        }
 
     }
 

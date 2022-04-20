@@ -13,19 +13,21 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class TDStep3
     {
-        private Door door;
-        private Button powerButton;
-        private Button timeButton;
-        private Button startCancelButton;
+        private IDoor door;
+        private IButton powerButton;
+        private IButton timeButton;
+        private IButton startCancelButton;
+        private IButton extentButton;
+        private IButton shortenButton;
 
-        private UserInterface ui;
+        private IUserInterface ui;
 
-        private Light light;
-        private Display display;
-        private CookController cooker;
+        private ILight light;
+        private IDisplay display;
+        private ICookController cooker;
 
-        private PowerTube powerTube;
-        private Timer timer;
+        private IPowerTube powerTube;
+        private ITimer timer;
 
         private IOutput output;
 
@@ -47,7 +49,7 @@ namespace Microwave.Test.Integration
 
             cooker = new CookController(timer, display, powerTube);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, extentButton, shortenButton, door, display, light, cooker);
             cooker.UI = ui;
         }
 
@@ -158,7 +160,7 @@ namespace Microwave.Test.Integration
             cooker = new CookController(faketimer, display, powerTube);
             // Then we must make a new UI
             ui = new UserInterface(
-                powerButton, timeButton, startCancelButton,
+                powerButton, timeButton, startCancelButton, extentButton, shortenButton,
                 door, display, light, cooker);
             // And make the association
             cooker.UI = ui;

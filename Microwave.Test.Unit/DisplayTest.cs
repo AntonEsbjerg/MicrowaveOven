@@ -45,7 +45,24 @@ namespace Microwave.Test.Unit
             uut.ShowTime(10, 15);
             output.Received().OutputLine(Arg.Is<string>(str => str.Contains("10:15")));
         }
-
+        [Test]
+        public void ShowTime_SomeMinuteSomeSecondNegative_CorrectOutput()
+        {
+            uut.ShowTime(-10, -15);
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
+        }
+        [Test]
+        public void ShowTime_SomeMinuteZeroSecondNegative_CorrectOutput()
+        {
+            uut.ShowTime(-5, 0);
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
+        }
+        [Test]
+        public void ShowTime_ZeroMinuteSomeSecondNegative_CorrectOutput()
+        {
+            uut.ShowTime(0, -5);
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:00")));
+        }
         [Test]
         public void ShowPower_Zero_CorrectOutput()
         {

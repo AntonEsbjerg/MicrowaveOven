@@ -83,5 +83,32 @@ namespace Microwave.Test.Unit
             powerTube.Received().TurnOff();
         }
 
+        [Test]
+        public void Cooking_Extended()
+        {
+            uut.StartCooking(50, 60);
+            uut.ExtendCooking();
+            timer.Received(1).TimerExtended();
+        }
+        [Test]
+        public void NotCooking_CookingNotExtended()
+        {  
+            uut.ExtendCooking();
+            timer.Received(0).TimerExtended();
+        }
+
+        [Test]
+        public void Cooking_Shorten()
+        {
+            uut.StartCooking(50, 60);
+            uut.ShortenCooking();
+            timer.Received(1).TimerShortened();
+        }
+        [Test]
+        public void NotCooking_CookingNotShortened()
+        {
+            uut.ShortenCooking();
+            timer.Received(0).TimerShortened();
+        }
     }
 }

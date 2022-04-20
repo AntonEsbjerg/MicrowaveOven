@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Threading;
 using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
+using Microwave.Classes.Interfaces;
+using Timer = Microwave.Classes.Boundary.Timer;
 
 namespace Microwave.App
 {
@@ -8,25 +11,27 @@ namespace Microwave.App
     {
         static void Main(string[] args)
         {
-            Button startCancelButton = new Button();
-            Button powerButton = new Button();
-            Button timeButton = new Button();
+            IButton startCancelButton = new Button();
+            IButton powerButton = new Button();
+            IButton timeButton = new Button();
+            IButton extendButton = new Button();
+            IButton shortenButton = new Button();
 
-            Door door = new Door();
+            IDoor door = new Door();
 
-            Output output = new Output();
+            IOutput output = new Output();
 
-            Display display = new Display(output);
+            IDisplay display = new Display(output);
 
-            PowerTube powerTube = new PowerTube(output);
+            IPowerTube powerTube = new PowerTube(output);
 
-            Light light = new Light(output);
+            ILight light = new Light(output);
 
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            IUserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton,door, display, light, cooker);
 
             // Finish the double association
             cooker.UI = ui;
@@ -38,12 +43,19 @@ namespace Microwave.App
             timeButton.Press();
 
             startCancelButton.Press();
-
+            Thread.Sleep(5000);
+            extendButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
+            Thread.Sleep(5000);
+            shortenButton.Press();
             // The simple sequence should now run
 
             System.Console.WriteLine("When you press enter, the program will stop");
             // Wait for input
-
+            
             System.Console.ReadLine();
         }
     }

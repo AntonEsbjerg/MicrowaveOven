@@ -11,20 +11,22 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class TDStep2
     {
-        private Door door;
-        private Button powerButton;
-        private Button timeButton;
-        private Button startCancelButton;
+        private IDoor door;
+        private IButton powerButton;
+        private IButton timeButton;
+        private IButton startCancelButton;
 
-        private UserInterface ui;
+        private IUserInterface ui;
 
-        private Light light;
-        private Display display;
-        private CookController cooker;
+        private ILight light;
+        private IDisplay display;
+        private ICookController cooker;
 
         private IPowerTube powerTube;
         private ITimer timer;
         private IOutput output;
+        private IButton extentButton;
+        private IButton shortenButton;
 
         [SetUp]
         public void Setup()
@@ -43,7 +45,7 @@ namespace Microwave.Test.Integration
 
             cooker = new CookController(timer, display, powerTube);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton,extentButton, shortenButton, door, display, light, cooker);
             cooker.UI = ui;
         }
 

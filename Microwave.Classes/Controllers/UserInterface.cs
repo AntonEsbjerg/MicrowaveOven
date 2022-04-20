@@ -12,7 +12,6 @@ namespace Microwave.Classes.Controllers
         }
 
         private States myState = States.READY;
-
         private ICookController myCooker;
         private ILight myLight;
         private IDisplay myDisplay;
@@ -24,6 +23,8 @@ namespace Microwave.Classes.Controllers
             IButton powerButton,
             IButton timeButton,
             IButton startCancelButton,
+            IButton extendButton,
+            IButton shortenButton,
             IDoor door,
             IDisplay display,
             ILight light,
@@ -32,6 +33,8 @@ namespace Microwave.Classes.Controllers
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
             startCancelButton.Pressed += new EventHandler(OnStartCancelPressed);
+            extendButton.Pressed += new EventHandler(ExtendCooking);
+            shortenButton.Pressed += new EventHandler(ShortenCooking);
 
             door.Closed += new EventHandler(OnDoorClosed);
             door.Opened += new EventHandler(OnDoorOpened);
@@ -81,6 +84,7 @@ namespace Microwave.Classes.Controllers
         {
             switch (myState)
             {
+
                 case States.SETPOWER:
                     ResetValues();
                     myDisplay.Clear();
@@ -153,6 +157,15 @@ namespace Microwave.Classes.Controllers
                     myState = States.READY;
                     break;
             }
+        }
+
+        public void ExtendCooking(object sender, EventArgs e)
+        {
+            myCooker.ExtendCooking();
+        }
+        public void ShortenCooking(object sender, EventArgs e)
+        {
+            myCooker.ShortenCooking();
         }
     }
 }
