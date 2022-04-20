@@ -16,7 +16,7 @@ namespace Microwave.Test.Integration
         private IButton startCancelButton;
         private IButton extendButton;
         private IButton shortenButton;
-        private IButton configurePowerTubeButton;
+  
 
         private IUserInterface ui;
 
@@ -42,7 +42,7 @@ namespace Microwave.Test.Integration
             extendButton = Substitute.For<IButton>();
 
             ui = new UserInterface(
-                powerButton, timeButton, startCancelButton, extendButton, shortenButton, configurePowerTubeButton,
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
                 door,
                 display, light, powerTube, cooker, buzzer);
         }

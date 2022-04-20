@@ -13,6 +13,5 @@ namespace Microwave.Classes.Interfaces
         void Stop();
         void ExtendCooking();
         void ShortenCooking();
-        int ChangePowerTubePowerLevel();
     }
 }

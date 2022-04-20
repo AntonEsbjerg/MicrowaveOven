@@ -19,7 +19,7 @@ namespace Microwave.Test.Integration
         private IButton startCancelButton;
         private IButton extendButton;
         private IButton shortenButton;
-        private IButton configurePowerTubeButton;
+  
 
         private IUserInterface ui;
 
@@ -45,7 +45,8 @@ namespace Microwave.Test.Integration
 
             light = new Light(output);
             display = new Display(output);
-            powerTube = new PowerTube(output);
+            int maxpower = 700;
+            powerTube = new PowerTube(output, maxpower);
             timer = new Timer();
             buzzer = new Buzzer(output);
 
@@ -53,7 +54,7 @@ namespace Microwave.Test.Integration
             cooker = new CookController(timer, display, powerTube);
 
             ui = new UserInterface(
-                powerButton, timeButton, startCancelButton, extendButton, shortenButton, configurePowerTubeButton,
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
                 door,
                 display, light, powerTube, cooker, buzzer);
 
@@ -161,14 +162,15 @@ namespace Microwave.Test.Integration
 
             light = new Light(output);
             display = new Display(output);
-            powerTube = new PowerTube(output);
+            int maxpower = 700;
+            powerTube = new PowerTube(output, maxpower);
             var faketimer = Substitute.For<ITimer>();
 
             // Make a new cooker, with the 
             cooker = new CookController(faketimer, display, powerTube);
             // Then we must make a new UI
             ui = new UserInterface(
-                powerButton, timeButton, startCancelButton, extendButton, shortenButton, configurePowerTubeButton,
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
                 door,
                 display, light, powerTube, cooker, buzzer);
             // And make the association

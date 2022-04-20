@@ -5,30 +5,24 @@ namespace Microwave.Classes.Boundary
 {
     public class PowerTube : IPowerTube
     {
-        private enum PowerLevel
-        {
-            Standard,
-            high,
-            VeryHigh,
-            VeryLow,
-            Low,
-        }
 
-        private PowerLevel powerLevel;
         private IOutput myOutput;
+        private int maxPower;
 
         private bool IsOn = false;
 
-        public PowerTube(IOutput output)
+        public PowerTube(IOutput output, int maxpower)
         {
             myOutput = output;
+            maxPower = maxpower;
+
         }
 
         public void TurnOn(int power)
         {
-            if (power < 1 || 700 < power)
+            if (power < 1 || maxPower < power)
             {
-                throw new ArgumentOutOfRangeException("power", power, "Must be between 1 and 700 (incl.)");
+                throw new ArgumentOutOfRangeException("power ", power, $" Must be between 1 and {maxPower} (incl.)");
             }
 
             if (IsOn)
@@ -55,37 +49,6 @@ namespace Microwave.Classes.Boundary
             IsOn = false;
         }
 
-        public int AdjustPower()
-        {
-            if (powerLevel == PowerLevel.Standard)
-            {
-                powerLevel = PowerLevel.high;
-                return 800;
-            }
-            else  if (powerLevel == PowerLevel.high)
-            {
-                powerLevel = PowerLevel.VeryHigh;
-                return 1000;
-            }
-            else if (powerLevel == PowerLevel.VeryHigh)
-            {
-                powerLevel = PowerLevel.VeryLow;
-                return 200;
-            }
-            else if (powerLevel == PowerLevel.VeryLow)
-            {
-                powerLevel = PowerLevel.Low;
-                return 600;
-            }
-            else if (powerLevel == PowerLevel.Low)
-            {
-                powerLevel = PowerLevel.Standard;
-                return 700;
-            }
-            else
-            {
-                return 50;
-            }
-        }
+
     }
 }

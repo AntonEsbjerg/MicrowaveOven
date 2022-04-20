@@ -116,7 +116,7 @@ namespace Microwave.Test.Unit
         public void Stop_StartedOneTick_NoExpiredTriggered()
         {
             ManualResetEvent pause = new ManualResetEvent(false);
-            int notifications = 0;
+            //int notifications = 0;
 
             uut.Expired += (sender, args) => pause.Set();
             uut.TimerTick += (sender, args) => uut.Stop();

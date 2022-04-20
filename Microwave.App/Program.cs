@@ -16,7 +16,6 @@ namespace Microwave.App
             IButton timeButton = new Button();
             IButton extendButton = new Button();
             IButton shortenButton = new Button();
-            IButton configurePowerTubeButton = new Button();
 
             IDoor door = new Door();
 
@@ -24,7 +23,8 @@ namespace Microwave.App
 
             IDisplay display = new Display(output);
 
-            IPowerTube powerTube = new PowerTube(output);
+            int maxpower = Convert.ToInt32(Console.ReadLine());
+            IPowerTube powerTube = new PowerTube(output, maxpower);
 
             ILight light = new Light(output);
 
@@ -34,7 +34,7 @@ namespace Microwave.App
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            IUserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton, configurePowerTubeButton, door, display, light, powerTube, cooker, buzzer);
+            IUserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton, door, display, light, powerTube, cooker, buzzer);
 
             // Finish the double association
             cooker.UI = ui;
@@ -47,8 +47,6 @@ namespace Microwave.App
             timeButton.Press();
 
             startCancelButton.Press();
-            Thread.Sleep(5000);
-            configurePowerTubeButton.Press(); 
             Thread.Sleep(5000);
             extendButton.Press();
             Thread.Sleep(5000);
