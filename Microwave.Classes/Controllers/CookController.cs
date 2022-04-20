@@ -90,21 +90,7 @@ namespace Microwave.Classes.Controllers
         }
 
 
-        public int ChangePowerTubePowerLevel()
-        {
-            if (isCooking)
-            {
-                return 0;
-            }
-            else
-            {
-                var power =
-                    myPowerTube.AdjustPower();
-                myDisplay.ShowPower(power);
-                return power;
-            }
 
-        }
 
 
 

@@ -28,7 +28,7 @@ namespace Microwave.Test.Integration
         private IOutput output;
         private IButton extendButton;
         private IButton shortenButton;
-        
+
 
         [SetUp]
         public void Setup()
