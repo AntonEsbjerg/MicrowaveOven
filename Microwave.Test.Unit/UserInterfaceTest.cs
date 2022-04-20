@@ -39,6 +39,7 @@ namespace Microwave.Test.Unit
             extendButton = Substitute.For<IButton>();
             shortenButton= Substitute.For<IButton>();
             buzzer = Substitute.For<IBuzzer>();
+            
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton, extendButton, shortenButton,
