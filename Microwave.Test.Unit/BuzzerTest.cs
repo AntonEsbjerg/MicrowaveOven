@@ -32,5 +32,32 @@ namespace Microwave.Test.Unit
             uut.BuzzerOff();
             output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("silent")));
         }
+        
+        [Test]
+        public void BuzzerOnAndOffAndOn_CorrectOutput()
+        {
+            uut.BuzzerOn();
+            uut.BuzzerOff();
+            uut.BuzzerOn();
+            output.Received(6).OutputLine(Arg.Is<string>(str => str.Contains("BEEP")));
+        }
+        
+        [Test]
+        public void BuzzerOff_CorrectOutput()
+        {
+            uut.BuzzerOff();
+            output.Received(0).OutputLine(Arg.Is<string>(str => str.Contains("silent")));
+        }
+        
+        [Test]
+        public void BuzzerOn_TwoTimes_CorrectOutput()
+        {
+            uut.BuzzerOn();
+            uut.BuzzerOn();
+            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("BEEP")));
+        }
+        
+        
+        
     }
 }
