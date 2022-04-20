@@ -42,10 +42,6 @@ namespace Microwave.Classes.Boundary
             {
                 myOutput.OutputLine($"PowerTube turned off");
             }
-            else
-            {
-                myOutput.OutputLine($"PowerTube already turned off");
-            }
             IsOn = false;
         }
 
