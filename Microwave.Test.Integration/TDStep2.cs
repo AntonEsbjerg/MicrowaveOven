@@ -26,7 +26,7 @@ namespace Microwave.Test.Integration
         private IPowerTube powerTube;
         private ITimer timer;
         private IOutput output;
-        private IButton extentButton;
+        private IButton extendButton;
         private IButton shortenButton;
 
         [SetUp]
@@ -36,6 +36,8 @@ namespace Microwave.Test.Integration
             powerButton = new Button();
             timeButton = new Button();
             startCancelButton = new Button();
+            shortenButton = Substitute.For<IButton>();
+            extendButton = Substitute.For<IButton>();
 
             powerTube = Substitute.For<IPowerTube>();
             timer = Substitute.For<ITimer>();

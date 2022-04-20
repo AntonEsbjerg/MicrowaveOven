@@ -16,7 +16,7 @@ namespace Microwave.Test.Integration
         private IDisplay display;
         private IPowerTube powerTube;
         private ICookController cooker;
-        private IButton extentButton;
+        private IButton extendButton;
         private IButton shortenButton;
 
         private IUserInterface ui;
