@@ -88,5 +88,25 @@ namespace Microwave.Classes.Controllers
                 myDisplay.ShowTime(remaining / 60, remaining % 60);
             }
         }
+
+
+        public int ChangePowerTubePowerLevel()
+        {
+            if (isCooking)
+            {
+                return 0;
+            }
+            else
+            {
+                var power =
+                    myPowerTube.AdjustPower();
+                myDisplay.ShowPower(power);
+                return power;
+            }
+
+        }
+
+
+
     }
 }

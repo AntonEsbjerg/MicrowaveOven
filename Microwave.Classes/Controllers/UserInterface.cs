@@ -60,9 +60,12 @@ namespace Microwave.Classes.Controllers
 
         public void ChangePowerTubePowerLevel(object sender, EventArgs e)
         {
-            powerLevel = 
-            myPowerTube.AdjustPower();
             
+            if (myCooker.ChangePowerTubePowerLevel() != 0)
+            {
+                powerLevel = myCooker.ChangePowerTubePowerLevel();
+            }
+
         }
 
         public void OnPowerPressed(object sender, EventArgs e)
