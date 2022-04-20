@@ -90,6 +90,12 @@ namespace Microwave.Test.Unit
             uut.ExtendCooking();
             timer.Received(1).TimerExtended();
         }
+        [Test]
+        public void NotCooking_CookingNotExtended()
+        {  
+            uut.ExtendCooking();
+            timer.Received(0).TimerExtended();
+        }
 
         [Test]
         public void Cooking_Shorten()
@@ -97,6 +103,12 @@ namespace Microwave.Test.Unit
             uut.StartCooking(50, 60);
             uut.ShortenCooking();
             timer.Received(1).TimerShortened();
+        }
+        [Test]
+        public void NotCooking_CookingNotShortened()
+        {
+            uut.ShortenCooking();
+            timer.Received(0).TimerShortened();
         }
     }
 }
