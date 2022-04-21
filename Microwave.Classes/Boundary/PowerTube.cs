@@ -7,7 +7,7 @@ namespace Microwave.Classes.Boundary
     {
 
         private IOutput myOutput;
-        private int maxPower;
+        public int maxPower { get; }
 
         private bool IsOn = false;
 
@@ -17,6 +17,7 @@ namespace Microwave.Classes.Boundary
             maxPower = maxpower;
 
         }
+
 
         public void TurnOn(int power)
         {

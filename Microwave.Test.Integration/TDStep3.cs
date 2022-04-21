@@ -26,6 +26,7 @@ namespace Microwave.Test.Integration
         private ILight light;
         private IDisplay display;
         private ICookController cooker;
+
         private IBuzzer buzzer;
 
         private IPowerTube powerTube;
@@ -40,6 +41,8 @@ namespace Microwave.Test.Integration
             powerButton = new Button();
             timeButton = new Button();
             startCancelButton = new Button();
+            extendButton = new Button();
+            shortenButton = new Button();
 
             output = Substitute.For<IOutput>();
 
