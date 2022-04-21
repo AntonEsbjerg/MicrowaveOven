@@ -23,16 +23,16 @@ namespace Microwave.App
 
             IDisplay display = new Display(output);
 
-            int maxpower = Convert.ToInt32(Console.ReadLine());
+            int maxpower = Convert.ToInt32(700);
             IPowerTube powerTube = new PowerTube(output, maxpower);
 
             ILight light = new Light(output);
 
-            Buzzer buzzer = new Buzzer(output);
+            IBuzzer buzzer = new Buzzer(output);
 
-            Microwave.Classes.Boundary.Timer timer = new Timer();
+            Microwave.Classes.Interfaces.ITimer timer = new Timer();
 
-            CookController cooker = new CookController(timer, display, powerTube);
+            ICookController cooker = new CookController(timer, display, powerTube);
 
             IUserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, extendButton, shortenButton, door, display, light, powerTube, cooker, buzzer);
 

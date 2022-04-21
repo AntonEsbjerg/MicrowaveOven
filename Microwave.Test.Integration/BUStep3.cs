@@ -46,7 +46,8 @@ namespace Microwave.Test.Integration
             display = new Display(output);
             int maxpower = 700;
             powerTube = new PowerTube(output, maxpower);
-
+            extendButton = new Button();
+            shortenButton = new Button();
             light = new Light(output);
             buzzer = new Buzzer(output);
 
