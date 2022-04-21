@@ -28,7 +28,6 @@ namespace Microwave.Classes.Controllers
             IButton startCancelButton,
             IButton extendButton,
             IButton shortenButton,
-            IButton configurePowerTubeButton,
             IDoor door,
             IDisplay display,
             ILight light,
@@ -41,7 +40,7 @@ namespace Microwave.Classes.Controllers
             startCancelButton.Pressed += new EventHandler(OnStartCancelPressed);
             extendButton.Pressed += new EventHandler(ExtendCooking);
             shortenButton.Pressed += new EventHandler(ShortenCooking);
-            configurePowerTubeButton.Pressed += new EventHandler(ChangePowerTubePowerLevel);
+
             door.Closed += new EventHandler(OnDoorClosed);
             door.Opened += new EventHandler(OnDoorOpened);
 
@@ -58,12 +57,6 @@ namespace Microwave.Classes.Controllers
             time = 1;
         }
 
-        public void ChangePowerTubePowerLevel(object sender, EventArgs e)
-        {
-            powerLevel = 
-            myPowerTube.AdjustPower();
-            
-        }
 
         public void OnPowerPressed(object sender, EventArgs e)
         {
@@ -74,7 +67,7 @@ namespace Microwave.Classes.Controllers
                     myState = States.SETPOWER;
                     break;
                 case States.SETPOWER:
-                    powerLevel = (powerLevel >= 700 ? 50 : powerLevel+50);
+                    powerLevel = (powerLevel >=  myPowerTube.maxPower ? 50 : powerLevel+50);
                     myDisplay.ShowPower(powerLevel);
                     break;
             }

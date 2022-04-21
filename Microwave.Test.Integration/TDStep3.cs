@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
@@ -19,6 +19,7 @@ namespace Microwave.Test.Integration
         private IButton startCancelButton;
         private IButton extendButton;
         private IButton shortenButton;
+  
 
         private IUserInterface ui;
 
@@ -44,14 +45,19 @@ namespace Microwave.Test.Integration
 
             light = new Light(output);
             display = new Display(output);
-            powerTube = new PowerTube(output);
+            int maxpower = 700;
+            powerTube = new PowerTube(output, maxpower);
             timer = new Timer();
             buzzer = new Buzzer(output);
 
 
             cooker = new CookController(timer, display, powerTube);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton,extendButton, shortenButton, door, display, light, cooker, buzzer);
+            ui = new UserInterface(
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
+                door,
+                display, light, powerTube, cooker, buzzer);
+
             cooker.UI = ui;
         }
 
@@ -156,15 +162,17 @@ namespace Microwave.Test.Integration
 
             light = new Light(output);
             display = new Display(output);
-            powerTube = new PowerTube(output);
+            int maxpower = 700;
+            powerTube = new PowerTube(output, maxpower);
             var faketimer = Substitute.For<ITimer>();
 
             // Make a new cooker, with the 
             cooker = new CookController(faketimer, display, powerTube);
             // Then we must make a new UI
             ui = new UserInterface(
-                powerButton, timeButton, startCancelButton, extendButton, shortenButton,
-                door, display, light, cooker, buzzer);
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
+                door,
+                display, light, powerTube, cooker, buzzer);
             // And make the association
             cooker.UI = ui;
 

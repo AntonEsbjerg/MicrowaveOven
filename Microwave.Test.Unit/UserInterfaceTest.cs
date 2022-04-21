@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
@@ -14,17 +15,20 @@ namespace Microwave.Test.Unit
         private IButton powerButton;
         private IButton timeButton;
         private IButton startCancelButton;
+        
 
         private IDoor door;
 
         private IDisplay display;
         private ILight light;
         private IBuzzer buzzer;
+        private IPowerTube powerTube;
 
         private ICookController cooker;
 
         private IButton extendButton;
         private IButton shortenButton;
+
 
         [SetUp]
         public void Setup()
@@ -39,14 +43,12 @@ namespace Microwave.Test.Unit
             extendButton = Substitute.For<IButton>();
             shortenButton= Substitute.For<IButton>();
             buzzer = Substitute.For<IBuzzer>();
+            powerTube = Substitute.For<IPowerTube>();
 
             uut = new UserInterface(
-                powerButton, timeButton, startCancelButton, extendButton, shortenButton,
+                powerButton, timeButton, startCancelButton, extendButton, shortenButton, 
                 door,
-                display,
-                light,
-                cooker,
-                buzzer);
+                display, light, powerTube, cooker, buzzer);
         }
 
         [Test]
@@ -83,6 +85,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_2PowerButton_PowerIs100()
         {
+            powerTube.maxPower.Returns(700);
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             display.Received(1).ShowPower(Arg.Is<int>(100));
@@ -91,6 +94,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_14PowerButton_PowerIs700()
         {
+            powerTube.maxPower.Returns(700);
             for (int i = 1; i <= 14; i++)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
@@ -101,6 +105,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_15PowerButton_PowerIs50Again()
         {
+            powerTube.maxPower.Returns(700);
             for (int i = 1; i <= 15; i++)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
@@ -204,6 +209,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_PowerAndTime_CookerIsCalledCorrectly()
         {
+            powerTube.maxPower.Returns(700);
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             // Now in SetPower
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
@@ -221,6 +227,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
+            powerTube.maxPower.Returns(700);
             for (int i = 50; i <= 700; i += 50)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
